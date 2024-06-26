@@ -1,33 +1,6 @@
-<template>
-  <div class="header">
-    <div class="content-wrapper">
-      <div class="header-logo">
-        <NuxtLink to="/">
-          <NuxtImg src="/images/cinema-logo.png" alt="cinema-logo" />
-        </NuxtLink>
-      </div>
-      <NuxtImg
-        v-if="!mobileMenuVisibility"
-        src="/images/menu_black_36dp.svg"
-        class="menu-icon"
-        @click="showHideMobileMenu"
-      />
-      <NuxtImg v-else name="close" src="/images/close_black_36dp.svg" class="menu-icon" @click="showHideMobileMenu" />
-      <nav class="nav" :class="{ 'show-mobile-menu': mobileMenuVisibility }" v-click-outside="clickOutsideMobileMenu">
-        <ul @click="hideMobileMenu">
-          <li>
-            <input type="search" placeholder="searching" />
-          </li>
-          <li>
-            <NuxtLink to="/how-it-work">How it work</NuxtLink>
-          </li>
-        </ul>
-      </nav>
-    </div>
-  </div>
-</template>
-
 <script setup>
+import TheSearchInput from "./TheSearchInput.vue";
+
 const mobileMenuVisibility = ref(false);
 
 function showHideMobileMenu() {
@@ -45,6 +18,35 @@ function hideMobileMenu() {
 }
 </script>
 
+<template>
+  <div class="header">
+    <div class="nav-wrapper">
+      <div class="header-logo">
+        <NuxtLink to="/">
+          <NuxtImg src="/images/cinema-logo.png" alt="cinema-logo" />
+        </NuxtLink>
+      </div>
+      <NuxtImg
+        v-if="!mobileMenuVisibility"
+        src="/images/menu_black_36dp.svg"
+        class="menu-icon"
+        @click="showHideMobileMenu"
+      />
+      <NuxtImg v-else name="close" src="/images/close_black_36dp.svg" class="menu-icon" @click="showHideMobileMenu" />
+      <nav class="nav" :class="{ 'show-mobile-menu': mobileMenuVisibility }" v-click-outside="clickOutsideMobileMenu">
+        <ul @click="hideMobileMenu">
+          <li>
+            <TheSearchInput />
+          </li>
+          <li>
+            <NuxtLink to="/how-it-work">How it work</NuxtLink>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </div>
+</template>
+
 <style lang="scss" scoped>
 @import "@/assets/styles/_variables.scss";
 
@@ -53,11 +55,18 @@ function hideMobileMenu() {
   background-color: $white;
   box-shadow: 0px -13px 33px rgba(0, 0, 0, 0.25);
 
-  .content-wrapper {
+  .nav-wrapper {
     height: inherit;
     display: flex;
     align-items: center;
     justify-content: space-between;
+    width: 1010px;
+    margin: 0 auto;
+
+    @media (max-width: 1080px) {
+      width: 90%;
+      margin: 0 auto;
+    }
 
     .header-logo {
       img {

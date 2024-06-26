@@ -1,13 +1,13 @@
+<script setup>
+import MovieGenres from "../components/MovieGenres.vue";
+import TheMainContent from "../components/TheMainContent.vue";
+</script>
+
 <template>
   <div class="content-wrapper">
-    <h1>Here will be a movies</h1>
+    <TheMainContent />
+    <MovieGenres />
   </div>
 </template>
 
-<script setup></script>
-
-<style lang="scss" scoped>
-.content-wrapper {
-  min-height: 75vh;
-}
-</style>
+<style lang="scss" scoped></style>

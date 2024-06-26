@@ -18,14 +18,18 @@
     "nuxt": "^3.12.2"
   },
   "dependencies": {
-    "vue": "^3.4.29",
-    "vue-router": "^4.3.3",
-    "click-outside-vue3": "^4.0.1",
+    "@pinia/nuxt": "^0.5.1",
     "@volar-plugins/prettier": "^2.0.0",
+    "click-outside-vue3": "^4.0.1",
+    "dompurify": "^3.1.5",
     "eslint-config-prettier": "^8.8.0",
     "eslint-plugin-prettier": "^4.2.1",
+    "i": "^0.3.7",
     "prettier": "^2.8.7",
+    "sanitize-html": "^2.13.0",
     "sass": "^1.69.5",
-    "sass-loader": "^13.2.2"
+    "sass-loader": "^13.2.2",
+    "vue": "^3.4.29",
+    "vue-router": "^4.3.3"
   }
 }

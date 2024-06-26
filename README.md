@@ -106,19 +106,12 @@ DRAMA: 3
 HORROR: 4
 WESTERNS: 5
 
-
-
 Get movies sessions:
 
 HTTP GET 
 /movieShows 
 OR
 /movieShows?movie_id={id}
-
-
-
-
-
 
 
 Book ticket:
@@ -140,8 +133,6 @@ HTTP POST
   "showdate": {string},
   "daytime": {string}
 }
-
-
 
 Request:
 {
@@ -165,6 +156,4 @@ Response:
         "ticketkey": "2a8cfbd5a4945f52e92c6b969f440192"
     }
 }
-
-
  -->

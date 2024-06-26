@@ -21,7 +21,6 @@
 @import "@/assets/styles/_variables.scss";
 
 .content-wrapper {
-  min-height: 80vh;
   font-size: 16px;
   display: flex;
   justify-content: space-between;

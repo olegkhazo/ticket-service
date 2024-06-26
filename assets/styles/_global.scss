@@ -18,6 +18,9 @@ html {
         .content-wrapper {
             width: 1010px;
             margin: 0 auto;
+            min-height: 80vh;
+            display: flex;
+            justify-content: space-between;
         
             @media (max-width: 1080px) {
                 width: 90%;
