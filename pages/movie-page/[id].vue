@@ -2,7 +2,6 @@
 import { useSingleMovieStore } from "@/stores/movieStore";
 
 const { singleMovie } = storeToRefs(useSingleMovieStore());
-const { id } = useRoute().params;
 
 function scrollToTopOfTheTableBody() {
   document.getElementById("sessions").scrollIntoView({
@@ -13,7 +12,7 @@ function scrollToTopOfTheTableBody() {
 </script>
 
 <template>
-  <div class="content-wrapper">
+  <div class="content-wrapper" v-if="singleMovie">
     <h1>{{ singleMovie.name }}</h1>
     <div class="single-movie-wrapper">
       <div class="main-info">

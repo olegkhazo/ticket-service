@@ -1,6 +1,7 @@
 <script setup>
 import { API_URL } from "@/utils/constants";
 import { convertTimeSessionsToArr } from "@/utils";
+
 const props = defineProps({
   movieData: {
     type: Object,
@@ -10,23 +11,44 @@ const props = defineProps({
 
 const id = props.movieData.id;
 const allSessions = ref([]);
-console.log(id);
-const { data: sessions, error } = await useFetch(API_URL + "/movieShows");
+const allSeats = ref([]);
+let showSeats = ref(false);
 
-watchEffect(() => {
-  if (sessions.value) {
-    const parsedSessions = JSON.parse(sessions.value);
+onMounted(async () => {
+  try {
+    const response = await $fetch(`${API_URL}/movieShows`);
+    const parsedSessions = JSON.parse(response);
     allSessions.value = parsedSessions.data[id];
+  } catch (error) {
+    console.error(error);
   }
 });
+
+async function checkFreePlaces(date, time) {
+  showSeats.value = false;
+  try {
+    const response = await $fetch(`${API_URL}/showPlaces?movie_id=${id}&daytime=${time}&showdate=${date}`);
+    const parsedSeatsInfo = JSON.parse(response);
+    allSeats.value = parsedSeatsInfo.data;
+    showSeats.value = true;
+  } catch (error) {
+    console.error(error);
+  }
+}
 </script>
 
 <template>
   <aside>
     <div id="sessions" class="sessions" v-for="date in allSessions" :key="date.showdate">
       <p>{{ date.showdate }}</p>
-      <span v-for="time in convertTimeSessionsToArr(date.daytime)" :key="time">{{ time }}</span>
+      <span
+        v-for="time in convertTimeSessionsToArr(date.daytime)"
+        :key="time"
+        @click="checkFreePlaces(date.showdate, time)"
+        >{{ time }}</span
+      >
     </div>
+    <CinemaSeatsView v-if="showSeats" :all-seats="allSeats" />
   </aside>
 </template>
 
