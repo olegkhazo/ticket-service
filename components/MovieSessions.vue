@@ -24,7 +24,9 @@ onMounted(async () => {
   }
 });
 
+const timeCreds = ref([]);
 async function checkFreePlaces(date, time) {
+  timeCreds.value = [date, time];
   showSeats.value = false;
   try {
     const response = await $fetch(`${API_URL}/showPlaces?movie_id=${id}&daytime=${time}&showdate=${date}`);
@@ -40,15 +42,17 @@ async function checkFreePlaces(date, time) {
 <template>
   <aside>
     <div id="sessions" class="sessions" v-for="date in allSessions" :key="date.showdate">
-      <p>{{ date.showdate }}</p>
-      <span
-        v-for="time in convertTimeSessionsToArr(date.daytime)"
-        :key="time"
-        @click="checkFreePlaces(date.showdate, time)"
-        >{{ time }}</span
-      >
+      <p>
+        {{ date.showdate }}
+        <span
+          v-for="time in convertTimeSessionsToArr(date.daytime)"
+          :key="time"
+          @click="checkFreePlaces(date.showdate, time)"
+          >{{ time }}</span
+        >
+      </p>
     </div>
-    <CinemaSeatsView v-if="showSeats" :all-seats="allSeats" />
+    <CinemaSeatsView v-if="showSeats" :all-seats="allSeats" :time-creds="timeCreds" />
   </aside>
 </template>
 

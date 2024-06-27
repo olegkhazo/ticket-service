@@ -1,4 +1,3 @@
-import TheHeader from '../components/TheHeader.vue';
 <template>
   <div>
     <TheHeader />
