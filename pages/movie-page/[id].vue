@@ -3,6 +3,13 @@ import { useSingleMovieStore } from "@/stores/movieStore";
 
 const { singleMovie } = storeToRefs(useSingleMovieStore());
 const { id } = useRoute().params;
+
+function scrollToTopOfTheTableBody() {
+  document.getElementById("sessions").scrollIntoView({
+    block: "start",
+    behavior: "smooth",
+  });
+}
 </script>
 
 <template>
@@ -12,14 +19,14 @@ const { id } = useRoute().params;
       <div class="main-info">
         <span>
           <NuxtImg :src="singleMovie.image" title="img" />
-
-          <button>Find tickets</button>
+          <button @click="scrollToTopOfTheTableBody">Find tickets</button>
         </span>
         <div class="movie-params">
           <span v-html="singleMovie.additional"></span>
         </div>
       </div>
       <div class="movie-description">{{ singleMovie.description }}</div>
+      <MovieSessions :movie-data="singleMovie" />
     </div>
   </div>
 </template>

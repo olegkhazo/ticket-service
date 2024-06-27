@@ -24,3 +24,9 @@ export function truncateString(str) {
     }
     return str;
   }
+
+export function convertTimeSessionsToArr(str) {
+    const resultArray = str.split(';');
+    
+    return resultArray;
+  }
